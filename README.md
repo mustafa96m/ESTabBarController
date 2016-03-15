@@ -1,4 +1,4 @@
-ESTabBarController
+ESTabBarController +  Bottom Button Title
 ========================
 
 [![Build Status](https://api.travis-ci.org/ezescaruli/ESTabBarController.svg?branch=master)](https://travis-ci.org/ezescaruli/ESTabBarController)
