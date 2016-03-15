@@ -40,6 +40,12 @@ typedef void (^ESTabBarAction)(void);
  */
 - (instancetype)initWithTabIcons:(NSArray *)tabIcons;
 
+/**
+ Initializes the tab bar with an array of UIImage that will be the icons
+ to show in the tab bar, As weel as tab Titles
+ */
+- (instancetype)initWithTabIcons:(NSArray *)tabIcons AndTitles:(NSArray *)tabTitles;
+
 
 /**
  Convenience initializer that receives an array of NSString images names.

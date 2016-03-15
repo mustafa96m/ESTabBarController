@@ -27,8 +27,8 @@
 
 #pragma mark - Public methods
 
-
 - (void)setupButtonsConstraints {
+    
     for (NSInteger i = 0; i < self.tabIcons.count; i++) {
         [self.buttons[i] setTranslatesAutoresizingMaskIntoConstraints:NO];
         
@@ -154,7 +154,7 @@
 
 
 - (NSArray *)heightLayoutConstraintsForIndicator {
-    return [NSLayoutConstraint constraintsWithVisualFormat:@"V:[selectionIndicator(==3)]"
+    return [NSLayoutConstraint constraintsWithVisualFormat:@"V:[selectionIndicator(==0)]"
                                                    options:0
                                                    metrics:nil
                                                      views:@{@"selectionIndicator": self.selectionIndicator}];

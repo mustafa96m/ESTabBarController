@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSMutableArray *buttons;
 @property (nonatomic, strong) NSMutableSet *highlightedButtonIndexes;
 @property (nonatomic, strong) NSArray *tabIcons;
+@property (nonatomic, strong) NSArray *tabTitles;
 @property (nonatomic, strong) UIView *selectionIndicator;
 @property (nonatomic, strong) NSLayoutConstraint *selectionIndicatorLeadingConstraint;
 @property (nonatomic, assign) CGFloat buttonsContainerHeightConstraintInitialConstant;
@@ -61,6 +62,17 @@
     return [self initWithTabIcons:icons];
 }
 
+-(instancetype)initWithTabIcons:(NSArray *)tabIcons AndTitles:(NSArray *)tabTitles{
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    self = [self initWithNibName:@"ESTabBarController" bundle:bundle];
+    
+    if (self != nil) {
+        [self initializeWithTabIcons:tabIcons AndTitles:tabTitles];
+    }
+    
+    return self;
+}
+
 
 #pragma mark - Getters / Setters
 
@@ -94,6 +106,7 @@
     
     self.separatorLine.backgroundColor = color;
 }
+
 
 
 #pragma mark - UIViewController
@@ -265,10 +278,16 @@
         UIButton *button = self.buttons[i];
         
         BOOL isHighlighted = [self.highlightedButtonIndexes containsObject:@(i)];
-        [button customizeForTabBarWithImage:self.tabIcons[i]
+        if (_tabTitles.count >  0) {
+            [button customizeForTabBarWithImage:self.tabIcons[i]
+                                  selectedColor:self.selectedColor ?: [UIColor blackColor]
+                                    highlighted:isHighlighted WithTitle:self.tabTitles[i]];
+
+        }else{
+            [button customizeForTabBarWithImage:self.tabIcons[i]
                               selectedColor:self.selectedColor ?: [UIColor blackColor]
                                 highlighted:isHighlighted];
-
+        }
     }
 }
 
@@ -370,6 +389,27 @@
     } else {
         animations();
     }
+}
+
+#pragma mark - Additional Private Methods
+
+
+- (void)initializeWithTabIcons:(NSArray *)tabIcons AndTitles:(NSArray *)tabTitles{
+    NSAssert(tabIcons.count > 0,
+             @"The array of tab icons shouldn't be empty.");
+    
+    _tabIcons = tabIcons;
+    _tabTitles = tabTitles;
+    
+    self.controllers = [NSMutableDictionary dictionaryWithCapacity:tabIcons.count];
+    self.actions = [NSMutableDictionary dictionaryWithCapacity:tabIcons.count];
+    
+    self.highlightedButtonIndexes = [NSMutableSet set];
+    
+    // No selected index at first.
+    _selectedIndex = -1;
+    
+    self.separatorLineColor = [UIColor lightGrayColor];
 }
 
 

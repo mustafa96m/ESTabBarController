@@ -15,4 +15,8 @@
                       selectedColor:(UIColor *)selectedColor
                         highlighted:(BOOL)highlighted;
 
+- (void)customizeForTabBarWithImage:(UIImage *)image
+                      selectedColor:(UIColor *)selectedColor
+                        highlighted:(BOOL)highlighted WithTitle:(NSString *)title;
+
 @end
