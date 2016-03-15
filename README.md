@@ -35,6 +35,11 @@ If the images are all loaded from the main bundle, a convenience initializer can
 ```objc
 ESTabBarController *tabBarController = [[ESTabBarController alloc] initWithTabIconNames:@[@"firstIcon", @"secondIcon", @"thirdIcon"]];
 ```
+If you want to include titles to tabs just initiatilize it with extra array of NSString
+```objc
+      ESTabBarController *tabBarController = [[ESTabBarController alloc] initWithTabIcons:@[[UIImage imageNamed:@"insights"],[UIImage imageNamed:@"doctors"],[UIImage imageNamed:@"reports"],[UIImage imageNamed:@"items"],[UIImage imageNamed:@"profile"]] AndTitles:@[@"Insights",@"Doctors",@"Reports",@"Items",@"Profile"]];
+```
+
 
 
 ### View controllers
